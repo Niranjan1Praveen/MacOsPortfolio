@@ -32,12 +32,12 @@ const navIcons = [
 ];
 
 const dockApps = [
-//   {
-//     id: "finder",
-//     name: "Portfolio", // was "Finder"
-//     icon: "finder.png",
-//     canOpen: true,
-//   },
+  {
+    id: "finder",
+    name: "Portfolio", // was "Finder"
+    icon: "finder.png",
+    canOpen: true,
+  },
   {
     id: "safari",
     name: "Articles", // was "Safari"

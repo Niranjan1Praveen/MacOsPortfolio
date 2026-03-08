@@ -18,7 +18,7 @@ interface WindowStore {
   windows: Record<string, WindowData>;
   activeWindowId: string | null;
   maxZIndex: number;
-  
+
   // Actions
   openWindow: (id: string, type: string, title: string, data?: any) => void;
   closeWindow: (id: string) => void;
@@ -26,8 +26,19 @@ interface WindowStore {
   maximizeWindow: (id: string) => void;
   restoreWindow: (id: string) => void;
   focusWindow: (id: string) => void;
-  updateWindowPosition: (id: string, position: { x: number; y: number }) => void;
-  updateWindowSize: (id: string, size: { width: number; height: number }) => void;
+  updateWindowPosition: (
+    id: string,
+    position: { x: number; y: number },
+  ) => void;
+  updateWindowSize: (
+    id: string,
+    size: { width: number; height: number },
+  ) => void;
+  desktopFolders: Record<string, { position: { x: number; y: number } }>;
+  updateFolderPosition: (
+    id: string,
+    position: { x: number; y: number },
+  ) => void;
 }
 
 const DEFAULT_WINDOW_SIZE = {
@@ -38,7 +49,7 @@ const DEFAULT_WINDOW_SIZE = {
   terminal: { width: 650, height: 450 },
   txtfile: { width: 600, height: 400 },
   imgfile: { width: 700, height: 500 },
-  default: { width: 600, height: 400 }
+  default: { width: 600, height: 400 },
 };
 
 const getRandomPosition = () => {
@@ -53,7 +64,7 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
 
   openWindow: (id, type, title, data) => {
     const { windows, maxZIndex } = get();
-    
+
     // If window already exists, just focus it
     if (windows[id]) {
       get().focusWindow(id);
@@ -62,7 +73,9 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
 
     const newZIndex = maxZIndex + 1;
     const position = getRandomPosition();
-    const size = DEFAULT_WINDOW_SIZE[type as keyof typeof DEFAULT_WINDOW_SIZE] || DEFAULT_WINDOW_SIZE.default;
+    const size =
+      DEFAULT_WINDOW_SIZE[type as keyof typeof DEFAULT_WINDOW_SIZE] ||
+      DEFAULT_WINDOW_SIZE.default;
 
     set((state) => ({
       windows: {
@@ -77,11 +90,11 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
           size,
           isMinimized: false,
           isMaximized: false,
-          data
-        }
+          data,
+        },
       },
       maxZIndex: newZIndex,
-      activeWindowId: id
+      activeWindowId: id,
     }));
   },
 
@@ -89,10 +102,11 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
     set((state) => {
       const newWindows = { ...state.windows };
       delete newWindows[id];
-      
+
       return {
         windows: newWindows,
-        activeWindowId: state.activeWindowId === id ? null : state.activeWindowId
+        activeWindowId:
+          state.activeWindowId === id ? null : state.activeWindowId,
       };
     });
   },
@@ -103,9 +117,9 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
         ...state.windows,
         [id]: {
           ...state.windows[id],
-          isMinimized: true
-        }
-      }
+          isMinimized: true,
+        },
+      },
     }));
   },
 
@@ -117,9 +131,9 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
           ...state.windows[id],
           isMaximized: true,
           position: { x: 0, y: 0 },
-          size: { width: window.innerWidth, height: window.innerHeight - 50 } // Adjust for dock
-        }
-      }
+          size: { width: window.innerWidth, height: window.innerHeight - 50 }, // Adjust for dock
+        },
+      },
     }));
   },
 
@@ -132,16 +146,16 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
           isMinimized: false,
           isMaximized: false,
           position: state.windows[id].position || { x: 50, y: 50 },
-          size: state.windows[id].size || DEFAULT_WINDOW_SIZE.default
-        }
-      }
+          size: state.windows[id].size || DEFAULT_WINDOW_SIZE.default,
+        },
+      },
     }));
   },
 
   focusWindow: (id) => {
     const { windows, maxZIndex } = get();
     const window = windows[id];
-    
+
     if (!window || window.isMinimized) return;
 
     const newZIndex = maxZIndex + 1;
@@ -151,11 +165,11 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
         ...state.windows,
         [id]: {
           ...state.windows[id],
-          zIndex: newZIndex
-        }
+          zIndex: newZIndex,
+        },
       },
       maxZIndex: newZIndex,
-      activeWindowId: id
+      activeWindowId: id,
     }));
   },
 
@@ -165,9 +179,9 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
         ...state.windows,
         [id]: {
           ...state.windows[id],
-          position
-        }
-      }
+          position,
+        },
+      },
     }));
   },
 
@@ -177,9 +191,22 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
         ...state.windows,
         [id]: {
           ...state.windows[id],
-          size
-        }
-      }
+          size,
+        },
+      },
     }));
-  }
+  },
+  desktopFolders: {
+    "work-folder": { position: { x: 50, y: 150 } },
+    "about-folder": { position: { x: 250, y: 150 } },
+    "resume-folder": { position: { x: 450, y: 150 } },
+  },
+  updateFolderPosition: (id, position) => {
+    set((state) => ({
+      desktopFolders: {
+        ...state.desktopFolders,
+        [id]: { position },
+      },
+    }));
+  },
 }));

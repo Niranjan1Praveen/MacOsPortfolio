@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Niranjan's Portfolio",
@@ -17,6 +17,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`antialiased bg-macos bg-macos-overlay`}>
+        <Toaster position="top-right" richColors closeButton />
+
         <Providers>{children}</Providers>
       </body>
     </html>

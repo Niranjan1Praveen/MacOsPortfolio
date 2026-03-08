@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
 
 const splitText = (text: string) =>
   text.split("").map((char, i) => (
@@ -10,7 +9,7 @@ const splitText = (text: string) =>
     </span>
   ));
 
-const setupMagneticText = (container: HTMLElement, radius = 160) => {
+const setupMagneticText = (container: HTMLElement, radius = 160, options = { useScale: true, useYOffset: true }) => {
   const chars = container.querySelectorAll<HTMLElement>(".char");
 
   const mouse = { x: 0, y: 0 };
@@ -23,14 +22,14 @@ const setupMagneticText = (container: HTMLElement, radius = 160) => {
   const targets = Array.from(chars).map(() => ({
     weight: 400,
     scale: 1,
-    y: 0
+    y: 0,
   }));
 
   // Current values for smooth interpolation
   const currents = Array.from(chars).map(() => ({
     weight: 400,
     scale: 1,
-    y: 0
+    y: 0,
   }));
 
   const move = (e: MouseEvent) => {
@@ -45,7 +44,7 @@ const setupMagneticText = (container: HTMLElement, radius = 160) => {
 
   const leave = () => {
     hovering = false;
-    
+
     // Reset all targets to original values
     chars.forEach((_, i) => {
       targets[i].weight = 400;
@@ -80,14 +79,27 @@ const setupMagneticText = (container: HTMLElement, radius = 160) => {
         if (dist < radius) {
           const strength = 1 - Math.min(1, dist / radius);
           const eased = 1 - Math.pow(1 - strength, 2);
-          
+
           targets[i].weight = 400 + Math.round(eased * 500);
-          targets[i].scale = 1 + eased * 0.2;
-          targets[i].y = -eased * 12;
+          
+          // Only update scale and y if enabled
+          if (options.useScale) {
+            targets[i].scale = 1 + eased * 0.2;
+          }
+          
+          if (options.useYOffset) {
+            targets[i].y = -eased * 12;
+          }
         } else {
           targets[i].weight = 400;
-          targets[i].scale = 1;
-          targets[i].y = 0;
+          
+          if (options.useScale) {
+            targets[i].scale = 1;
+          }
+          
+          if (options.useYOffset) {
+            targets[i].y = 0;
+          }
         }
       });
     }
@@ -96,14 +108,30 @@ const setupMagneticText = (container: HTMLElement, radius = 160) => {
     chars.forEach((char, i) => {
       // Interpolation factor (0.15 = smooth follow, higher = faster)
       const factor = 0.15;
-      
+
       currents[i].weight += (targets[i].weight - currents[i].weight) * factor;
-      currents[i].scale += (targets[i].scale - currents[i].scale) * factor;
-      currents[i].y += (targets[i].y - currents[i].y) * factor;
+      
+      if (options.useScale) {
+        currents[i].scale += (targets[i].scale - currents[i].scale) * factor;
+      }
+      
+      if (options.useYOffset) {
+        currents[i].y += (targets[i].y - currents[i].y) * factor;
+      }
 
       // Apply rounded weight for font-weight (needs integer)
       char.style.fontWeight = Math.round(currents[i].weight).toString();
-      char.style.transform = `translateY(${currents[i].y}px) scale(${currents[i].scale})`;
+      
+      // Build transform string based on enabled options
+      let transform = '';
+      if (options.useYOffset) {
+        transform += `translateY(${currents[i].y}px)`;
+      }
+      if (options.useScale) {
+        transform += ` scale(${currents[i].scale})`;
+      }
+      
+      char.style.transform = transform || 'none';
     });
 
     animationFrame = requestAnimationFrame(tick);
@@ -127,7 +155,11 @@ export default function Welcome() {
     if (!titleRef.current || !subtitleRef.current) return;
 
     const cleanup1 = setupMagneticText(titleRef.current, 140);
-    const cleanup2 = setupMagneticText(subtitleRef.current, 200);
+    // Disable scale and Y offset for the portfolio word (only smooth bolding)
+    const cleanup2 = setupMagneticText(subtitleRef.current, 200, { 
+      useScale: false, 
+      useYOffset: false 
+    });
 
     return () => {
       cleanup1();
@@ -140,16 +172,15 @@ export default function Welcome() {
       <div className="text-center px-4">
         <p
           ref={titleRef}
-          className="pointer-events-auto text-2xl md:text-3xl lg:text-4xl font-georama mb-4"
-          style={{ cursor: 'default' }}
+          className="pointer-events-auto text-xl md:text-2xl lg:text-3xl mb-4 cursor-default"
+          style={{ fontFamily: "Inter, sans-serif", fontWeight: 100 }}
         >
           {splitText("Hey, I'm Niranjan! Welcome to my")}
         </p>
 
         <h1
           ref={subtitleRef}
-          className="pointer-events-auto mt-4 md:mt-7 text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-georama italic"
-          style={{ cursor: 'default' }}
+          className="pointer-events-auto mt-4 md:mt-7 text-6xl md:text-7xl lg:text-8xl xl:text-9xl italic cursor-default"
         >
           {splitText("portfolio.")}
         </h1>
