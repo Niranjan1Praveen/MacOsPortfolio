@@ -88,7 +88,7 @@ export default function DesktopFolder({
   return (
     <div
       ref={folderRef}
-      className="absolute flex flex-col items-center w-24 cursor-default select-none group"
+      className="absolute flex flex-col items-center w-24 hover:cursor-grab select-none group"
       style={{
         left: position.x,
         top: position.y,
@@ -107,7 +107,7 @@ export default function DesktopFolder({
           draggable={false}
         />
       </div>
-      <div className="px-2 py-1 rounded bg-black/30 backdrop-blur-sm text-white text-xs text-center">
+      <div className="px-2 py-1 rounded text-white text-xs text-center">
         {name}
       </div>
     </div>

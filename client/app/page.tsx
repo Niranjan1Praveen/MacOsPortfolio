@@ -1,41 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Dock from "@/components/Dock";
 import Navbar from "@/components/Navbar";
 import Welcome from "@/components/Welcome";
 import WindowManager from "@/components/WindowManager";
 import DesktopFolder from "@/components/DesktopFolder";
 import { useWindowStore } from "@/store/windowStore";
+import MacOSToast from "@/components/MacOSToast";
 
 function Home() {
   const { desktopFolders } = useWindowStore();
-  const [showToast, setShowToast] = useState(false);
-
-  useEffect(() => {
-    // Check if user has seen the tip before
-    const hasSeenTip = localStorage.getItem("hasSeenDoubleClickTip");
-    
-    if (!hasSeenTip) {
-      const timer = setTimeout(() => {
-        setShowToast(true);
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  const handleToastDismiss = () => {
-    setShowToast(false);
-    localStorage.setItem("hasSeenDoubleClickTip", "true");
-  };
 
   return (
     <div className="relative min-h-screen">
       <Navbar />
       <Welcome/>
       
-      <MacOSToast show={showToast} onDismiss={handleToastDismiss} />
+      <MacOSToast />
       
       <DesktopFolder
         id="nike-folder"
@@ -43,7 +24,7 @@ function Home() {
         icon="/images/folder.png"
         folderType="work"
         projectId={5}
-        initialPosition={desktopFolders["nike-folder"]?.position || { x: 50, y: 150 }}
+        initialPosition={desktopFolders["nike-folder"]?.position || { x: 50, y: 100 }}
       />
       <DesktopFolder
         id="ai-resume-folder"
@@ -51,7 +32,7 @@ function Home() {
         icon="/images/folder.png"
         folderType="work"
         projectId={6}
-        initialPosition={desktopFolders["ai-resume-folder"]?.position || { x: 250, y: 150 }}
+        initialPosition={desktopFolders["ai-resume-folder"]?.position || { x: 50, y: 240 }}
       />
       <DesktopFolder
         id="food-delivery-folder"
@@ -59,7 +40,7 @@ function Home() {
         icon="/images/folder.png"
         folderType="work"
         projectId={7}
-        initialPosition={desktopFolders["food-delivery-folder"]?.position || { x: 450, y: 150 }}
+        initialPosition={desktopFolders["food-delivery-folder"]?.position || { x: 50, y: 380 }}
       />
       
       <WindowManager />
