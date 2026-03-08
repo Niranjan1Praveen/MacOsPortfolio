@@ -81,8 +81,6 @@ export default function FinderWindow({ data }: FinderWindowProps) {
 
   // Handle double-click on a file
   const handleFileDoubleClick = (file: any) => {
-    setSelectedFile(file);
-
     // Open file based on type
     if (file.fileType === "txt") {
       openWindow(`txt-${file.id}`, "txtfile", file.name, {
