@@ -43,17 +43,17 @@ interface WindowStore {
 
 const DEFAULT_WINDOW_SIZE = {
   finder: { width: 800, height: 500 },
-  safari: { width: 900, height: 600 },
+  safari: { width: 900, height: 520 },
   photos: { width: 850, height: 550 },
-  contact: { width: 500, height: 400 },
-  terminal: { width: 650, height: 450 },
+  contact: { width: 650, height: 500 },
+  terminal: { width: 650, height: 420 },
   txtfile: { width: 600, height: 400 },
   imgfile: { width: 700, height: 500 },
   default: { width: 600, height: 400 },
 };
 
 const getRandomPosition = () => {
-  const offset = 50 + Math.random() * 100;
+  const offset = 100 + Math.random() * 100;
   return { x: offset, y: offset };
 };
 

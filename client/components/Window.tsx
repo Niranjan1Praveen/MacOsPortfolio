@@ -31,7 +31,7 @@ export default function Window({ id, title, type, data }: WindowProps) {
       case "finder":
         return <FinderWindow data={data} />;
       case "resume":
-        return <ResumeWindow />;
+        return <ResumeWindow data={data}/>;
       case "txtfile":
         return <TxtFileWindow data={data} />;
       case "imgfile":

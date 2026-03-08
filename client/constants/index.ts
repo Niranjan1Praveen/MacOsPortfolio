@@ -2,7 +2,7 @@ const navLinks = [
   {
     id: 1,
     name: "Projects",
-    type: "finder",
+    type: "finder", 
   },
   {
     id: 3,
@@ -98,7 +98,7 @@ const blogPosts = [
 const techStack = [
   {
     category: "Frontend",
-    items: ["React.js", "Next.js", "TypeScript"],
+    items: ["React.js", "Next.js", "TypeScript", "HTML", "CSS"],
   },
   {
     category: "Mobile",
@@ -109,16 +109,20 @@ const techStack = [
     items: ["Tailwind CSS", "Sass", "CSS"],
   },
   {
+    category: "AI/ML",
+    items: ["TensorFlow", "PyTorch", "LangChain", "OpenAI API", "Langgraph"],
+  },
+  {
     category: "Backend",
-    items: ["Node.js", "Express", "NestJS", "Hono"],
+    items: ["Node.js", "Express", "Python", "Django", "Flask"],
   },
   {
     category: "Database",
-    items: ["MongoDB", "PostgreSQL"],
+    items: ["Supabase", "PostgreSQL"],
   },
   {
     category: "Dev Tools",
-    items: ["Git", "GitHub", "Docker"],
+    items: ["Git", "GitHub"],
   },
 ];
 
@@ -128,7 +132,7 @@ const socials = [
     text: "Github",
     icon: "/icons/github.svg",
     bg: "#f4656b",
-    link: "https://github.com/JavaScript-Mastery-Pro",
+    link: "https://github.com/Niranjan1Praveen",
   },
   {
     id: 2,
@@ -149,7 +153,7 @@ const socials = [
     text: "LinkedIn",
     icon: "/icons/linkedin.svg",
     bg: "#05b6f6",
-    link: "https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all",
+    link: "https://www.linkedin.com/in/niranjan-praveen-a9019921a/",
   },
 ];
 
@@ -218,41 +222,41 @@ const WORK_LOCATION = {
   icon: "/icons/work.svg",
   kind: "folder",
   children: [
-    // ▶ Project 1
+    // ▶ EchoWithin
     {
       id: 5,
-      name: "Nike Ecommerce Website Application",
+      name: "EchoWithin",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 left-5", // icon position inside Finder
-      windowPosition: "top-[5vh] left-5", // optional: Finder window position
+      position: "top-10 left-5",
+      windowPosition: "top-[5vh] left-5",
       children: [
         {
           id: 1,
-          name: "Nike Project.txt",
+          name: "EchoWithin.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 left-10",
           description: [
-            "The Nike eCommerce website is a sleek and modern platform designed for shopping the latest Nike collections.",
-            "Instead of a simple online store, it delivers an immersive experience with bold visuals, interactive product displays, and smooth navigation.",
-            "Think of it like walking into a flagship Nike store—but right from your phone or laptop.",
-            "It's built with Next.js and Tailwind, ensuring fast performance, responsive design, and a clean, premium look.",
+            "EchoWithin is a mindfulness and journaling application designed to help users reflect and track their emotional well-being.",
+            "Instead of a basic diary, it uses AI-powered sentiment analysis to provide insights into your emotional patterns over time.",
+            "Think of it as a personal wellness companion that helps you understand yourself better through guided reflection and mood tracking.",
+            "Built with modern web technologies for a seamless and private journaling experience.",
           ],
         },
         {
           id: 2,
-          name: "nike.com",
+          name: "github.com/Niranjan1Praveen/EchoWithin",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://youtu.be/fZdTYswuZjU?si=Awjl-pIst9e09_UU",
+          href: "https://github.com/Niranjan1Praveen/EchoWithin",
           position: "top-10 right-20",
         },
         {
           id: 4,
-          name: "nike.png",
+          name: "echowithin-demo.png",
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
@@ -261,20 +265,20 @@ const WORK_LOCATION = {
         },
         {
           id: 5,
-          name: "Design.fig",
+          name: "README.md",
           icon: "/images/plain.png",
           kind: "file",
-          fileType: "fig",
-          href: "https://google.com",
+          fileType: "md",
+          href: "https://github.com/Niranjan1Praveen/EchoWithin/blob/main/README.md",
           position: "top-60 right-20",
         },
       ],
     },
 
-    // ▶ Project 2
+    // ▶ AdversaNet
     {
       id: 6,
-      name: "AI Resume Analyzer",
+      name: "AdversaNet",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-52 right-80",
@@ -282,30 +286,30 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "AI Resume Analyzer Project.txt",
+          name: "AdversaNet.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 right-10",
           description: [
-            "AI Resume Analyzer is a smart tool that helps you perfect your resume with instant feedback.",
-            "Instead of guessing what recruiters want, you get AI-powered insights on keywords, formatting, and overall impact.",
-            "Think of it like having a career coach—pointing out strengths, fixing weaknesses, and boosting your chances of landing interviews.",
-            "It's built with Next.js and Tailwind, so it runs fast, looks professional, and works seamlessly on any device.",
+            "AdversaNet is a cybersecurity tool focused on adversarial machine learning and network security.",
+            "Instead of traditional security measures, it uses AI to simulate and defend against sophisticated cyber attacks.",
+            "Think of it as a digital sparring partner that helps strengthen your systems by thinking like an attacker.",
+            "Perfect for security researchers and organizations wanting to test their defenses against AI-powered threats.",
           ],
         },
         {
           id: 2,
-          name: "ai-resume-analyzer.com",
+          name: "github.com/Niranjan1Praveen/AdversaNet",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://youtu.be/iYOz165wGkQ?si=R1hs8Legl200m0Cl",
+          href: "https://github.com/Niranjan1Praveen/AdversaNet",
           position: "top-20 left-20",
         },
         {
           id: 4,
-          name: "ai-resume-analyzer.png",
+          name: "adversanet-demo.png",
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
@@ -314,20 +318,20 @@ const WORK_LOCATION = {
         },
         {
           id: 5,
-          name: "Design.fig",
+          name: "README.md",
           icon: "/images/plain.png",
           kind: "file",
-          fileType: "fig",
-          href: "https://google.com",
+          fileType: "md",
+          href: "https://github.com/Niranjan1Praveen/AdversaNet/blob/main/README.md",
           position: "top-60 left-5",
         },
       ],
     },
 
-    // ▶ Project 3
+    // ▶ Exoplanetarium
     {
       id: 7,
-      name: "Food Delivery App",
+      name: "Exoplanetarium",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-80",
@@ -335,30 +339,30 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "Food Delivery App Project.txt",
+          name: "Exoplanetarium.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 left-10",
           description: [
-            "Our Food Delivery App is a fast and convenient way to order meals from your favorite restaurants.",
-            "Instead of making calls or waiting in line, you can browse menus, customize orders, and track deliveries in real time.",
-            "Think of it like having your favorite restaurants in your pocket—ready to deliver anytime, anywhere.",
-            "It’s built with React Native, so it works smoothly on both iOS and Android with a clean, modern design.",
+            "Exoplanetarium is an interactive 3D visualization platform for exploring exoplanets discovered by space telescopes.",
+            "Instead of static data tables, it offers an immersive journey through distant star systems and alien worlds.",
+            "Think of it as a personal planetarium where you can fly to real exoplanets and learn about their characteristics.",
+            "Built with Three.js and astrophysics data to make space exploration accessible and educational.",
           ],
         },
         {
           id: 2,
-          name: "food-delivery-app.com",
+          name: "github.com/Niranjan1Praveen/Exoplanetarium",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://youtu.be/LKrX390fJMw?si=cExkuVhf2DTV9G2-",
+          href: "https://github.com/Niranjan1Praveen/Exoplanetarium",
           position: "top-10 right-20",
         },
         {
           id: 4,
-          name: "food-delivery-app.png",
+          name: "exoplanetarium-demo.png",
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
@@ -367,12 +371,118 @@ const WORK_LOCATION = {
         },
         {
           id: 5,
-          name: "Design.fig",
+          name: "README.md",
           icon: "/images/plain.png",
           kind: "file",
-          fileType: "fig",
-          href: "https://google.com",
+          fileType: "md",
+          href: "https://github.com/Niranjan1Praveen/Exoplanetarium/blob/main/README.md",
           position: "top-60 right-20",
+        },
+      ],
+    },
+
+    // ▶ FarmBandhu
+    {
+      id: 8,
+      name: "FarmBandhu",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-40 left-40",
+      windowPosition: "top-[46vh] left-7",
+      children: [
+        {
+          id: 1,
+          name: "FarmBandhu.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "FarmBandhu is a comprehensive agricultural platform connecting farmers with resources, markets, and expert advice.",
+            "Instead of traditional farming methods, it uses AI and IoT to provide crop recommendations, weather updates, and pest detection.",
+            "Think of it as a digital friend for farmers that helps increase yield, reduce costs, and access fair market prices.",
+            "Built with a focus on accessibility and regional languages to serve rural communities effectively.",
+          ],
+        },
+        {
+          id: 2,
+          name: "github.com/Niranjan1Praveen/FarmBandhu",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/Niranjan1Praveen/FarmBandhu",
+          position: "top-20 right-20",
+        },
+        {
+          id: 4,
+          name: "farmbandhu-demo.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 left-80",
+          imageUrl: "/images/project-4.png",
+        },
+        {
+          id: 5,
+          name: "README.md",
+          icon: "/images/plain.png",
+          kind: "file",
+          fileType: "md",
+          href: "https://github.com/Niranjan1Praveen/FarmBandhu/blob/main/README.md",
+          position: "top-60 right-20",
+        },
+      ],
+    },
+
+    // ▶ Mediscribe
+    {
+      id: 9,
+      name: "Mediscribe",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-70 left-70",
+      windowPosition: "top-[59vh] left-7",
+      children: [
+        {
+          id: 1,
+          name: "Mediscribe.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 right-10",
+          description: [
+            "Mediscribe is an AI-powered medical transcription and documentation assistant for healthcare professionals.",
+            "Instead of manual note-taking, it converts doctor-patient conversations into structured medical records in real-time.",
+            "Think of it as a virtual scribe that lets doctors focus on patients while ensuring accurate, compliant documentation.",
+            "Built with healthcare-grade security and integration capabilities for modern medical practices.",
+          ],
+        },
+        {
+          id: 2,
+          name: "github.com/Niranjan1Praveen/Mediscribe",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/Niranjan1Praveen/Mediscribe",
+          position: "top-10 left-20",
+        },
+        {
+          id: 4,
+          name: "mediscribe-demo.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 right-80",
+          imageUrl: "/images/project-5.png",
+        },
+        {
+          id: 5,
+          name: "README.md",
+          icon: "/images/plain.png",
+          kind: "file",
+          fileType: "md",
+          href: "https://github.com/Niranjan1Praveen/Mediscribe/blob/main/README.md",
+          position: "top-60 left-5",
         },
       ],
     },
@@ -423,10 +533,15 @@ const ABOUT_LOCATION = {
       subtitle: "Meet the Developer Behind the Code",
       image: "/images/adrian.jpg",
       description: [
-        "Hey! I’m Adrian 👋, a web developer who enjoys building sleek, interactive websites that actually work well.",
-        "I specialize in JavaScript, React, and Next.js—and I love making things feel smooth, fast, and just a little bit delightful.",
-        "I’m big on clean UI, good UX, and writing code that doesn’t need a search party to debug.",
-        "Outside of dev work, you'll find me tweaking layouts at 2AM, sipping overpriced coffee, or impulse-buying gadgets I absolutely convinced myself I needed 😅",
+        "👋 Hi, I'm Niranjan Praveen A Full Stack Developer, AI Engineer, and SEO Content Writer who builds intelligent web experiences and crafts content that ranks. I bridge the gap between cutting-edge AI technology and human connection—writing clean code on one side, and search-optimized content on the other.",
+        "What I Do?",
+        "Responsive Web Development: HTML, CSS/SASS, JavaScript, ReactJS, and NextJS—delivering robust, mobile-first websites that work seamlessly across devices.",
+        "AI & Intelligent Systems: Building conversational agents and intelligent workflows with Langchain and Langgraph. Creating AI-powered applications that think, reason, and respond.",
+        "SEO Content Development: Crafting website content, articles, and blogs that are not just well-written—but strategically optimized to rank on search engines and drive organic traffic.",
+        "My Approach",
+        "I believe great work comes from collaboration. I actively engage with clients—even on the smallest details—to build trust, ensure alignment, and deliver results that truly resonate.",
+        "Let's Connect",
+        "I'm currently available for freelance projects and contests. Whether you need a responsive website, an AI-powered solution, or SEO content that converts—let's create something remarkable together.",
       ],
     },
   ],
@@ -445,8 +560,6 @@ const RESUME_LOCATION = {
       icon: "/images/pdf.png",
       kind: "file",
       fileType: "pdf",
-      // you can add `href` if you want to open a hosted resume
-      // href: "/your/resume/path.pdf",
     },
   ],
 };

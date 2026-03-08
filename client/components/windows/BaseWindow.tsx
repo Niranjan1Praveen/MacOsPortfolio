@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { useWindowStore } from "@/store/windowStore";
+import { useTheme } from "next-themes";
 
 interface BaseWindowProps {
   id: string;
@@ -15,6 +16,7 @@ export default function BaseWindow({ id, title, children }: BaseWindowProps) {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isResizing, setIsResizing] = useState(false);
   const [resizeDirection, setResizeDirection] = useState<string | null>(null);
+  const { theme } = useTheme();
   
   const {
     windows,
@@ -126,10 +128,16 @@ export default function BaseWindow({ id, title, children }: BaseWindowProps) {
     updateWindowSize,
   ]);
 
+  const isDark = theme === "dark";
+
   return (
     <div
       ref={windowRef}
-      className="fixed bg-white/90 backdrop-blur-md rounded-lg shadow-2xl border border-gray-200 overflow-hidden"
+      className={`fixed rounded-lg shadow-2xl overflow-hidden transition-colors duration-200 ${
+        isDark 
+          ? "bg-[#1e1e1e] border-gray-800" 
+          : "bg-white/90 backdrop-blur-md border-gray-200"
+      }`}
       style={{
         left: windowData.position.x,
         top: windowData.position.y,
@@ -141,7 +149,13 @@ export default function BaseWindow({ id, title, children }: BaseWindowProps) {
       onMouseDown={handleMouseDown}
     >
       {/* Window Header */}
-      <div className="window-header h-10 bg-gray-100/80 backdrop-blur-sm border-b border-gray-200 flex items-center px-3 cursor-move select-none">
+      <div
+        className={`window-header h-10 backdrop-blur-sm border-b flex items-center px-3 cursor-grab select-none transition-colors duration-200 ${
+          isDark
+            ? "bg-[#323232] border-none"
+            : "bg-gray-100/80 border-gray-200"
+        }`}
+      >
         <div className="flex gap-2 mr-4">
           <button
             onClick={() => closeWindow(id)}
@@ -159,7 +173,11 @@ export default function BaseWindow({ id, title, children }: BaseWindowProps) {
           />
         </div>
 
-        <div className="flex-1 text-center text-sm font-medium text-gray-700 truncate">
+        <div
+          className={`flex-1 text-center text-sm font-medium truncate transition-colors duration-200 ${
+            isDark ? "text-gray-200" : "text-gray-700"
+          }`}
+        >
           {title}
         </div>
 
@@ -167,25 +185,29 @@ export default function BaseWindow({ id, title, children }: BaseWindowProps) {
       </div>
 
       {/* Window Content */}
-      <div className="h-[calc(100%-2.5rem)] overflow-auto">
+      <div
+        className={`h-[calc(100%-2.5rem)] overflow-auto transition-colors duration-200 ${
+          isDark ? "text-gray-200" : "text-gray-900"
+        }`}
+      >
         {children}
       </div>
 
       {/* Resize Handles */}
       <div
-        className="absolute top-0 left-0 w-2 h-full cursor-w-resize hover:bg-blue-200/50"
+        className="absolute top-0 left-0 w-2 h-full cursor-w-resize"
         onMouseDown={(e) => handleResizeStart(e, "w")}
       />
       <div
-        className="absolute top-0 right-0 w-2 h-full cursor-e-resize hover:bg-blue-200/50"
+        className="absolute top-0 right-0 w-2 h-full cursor-e-resize"
         onMouseDown={(e) => handleResizeStart(e, "e")}
       />
       <div
-        className="absolute bottom-0 left-0 w-full h-2 cursor-s-resize hover:bg-blue-200/50"
+        className="absolute bottom-0 left-0 w-full h-2 cursor-s-resize"
         onMouseDown={(e) => handleResizeStart(e, "s")}
       />
       <div
-        className="absolute top-0 left-0 w-full h-2 cursor-n-resize hover:bg-blue-200/50"
+        className="absolute top-0 left-0 w-full h-2 cursor-n-resize"
         onMouseDown={(e) => handleResizeStart(e, "n")}
       />
       <div

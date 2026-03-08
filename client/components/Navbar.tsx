@@ -1,19 +1,45 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { ThemeToggle } from "./ThemeToggle";
-import { navIcons, navLinks } from "@/constants";
+import { navIcons, navLinks, socials } from "@/constants"; // Make sure to import socials
+import { useWindowStore } from "@/store/windowStore";
+
+// Define proper types
+interface NavLink {
+  id: number;
+  name: string;
+  type: string;
+}
 
 export default function Navbar() {
-  const { setTheme, theme } = useTheme();
+  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [time, setTime] = useState("");
+  
+  // Get the openWindow function from your store
+  const { openWindow } = useWindowStore();
+
+  // Handler function to open windows
+  const handleNavClick = (type: string, name: string) => {
+    if (type === "finder") {
+      openWindow("finder-main", "finder", "Finder - Projects", { 
+        folderType: "work",
+        folderName: "Work"
+      });
+    } else if (type === "contact") {
+      // Open the contact window with socials data
+      openWindow("contact-window", "contact", "Contact", { 
+        socials: socials // Pass the socials data here
+      });
+    } else if (type === "resume") {
+      openWindow("resume-window", "resume", "Resume", {});
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -42,14 +68,23 @@ export default function Navbar() {
     <nav>
       {/* Left section - matches nav div:first-child */}
       <div>
-        <Image src="/images/logo.svg" alt="logo" width={15} height={15} className="-translate-y-0.5 dark:invert"/>
+        <Image 
+          src="/images/logo.svg" 
+          alt="logo" 
+          width={15} 
+          height={15} 
+          className="-translate-y-0.5 dark:invert"
+        />
         <p className="font-extrabold">Niranjan's Portfolio</p>
         <ul>
-          {navLinks.map((link) => (
+          {navLinks.map((link: NavLink) => (
             <li key={link.id}>
-              <Link href={link.type}>
-                <p>{link.name}</p>
-              </Link>
+              <button 
+                onClick={() => handleNavClick(link.type, link.name)}
+                className="hover:underline cursor-pointer bg-transparent border-none p-0 font-inherit text-inherit"
+              >
+                {link.name}
+              </button>
             </li>
           ))}
         </ul>

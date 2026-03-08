@@ -14,35 +14,61 @@ function Home() {
   return (
     <div className="relative min-h-screen">
       <Navbar />
-      <Welcome/>
-      
+      <Welcome />
+
       <MacOSToast />
-      
+
       <DesktopFolder
-        id="nike-folder"
-        name="Nike Ecommerce"
+        id="echowithin-folder"
+        name="EchoWithin"
         icon="/images/folder.png"
         folderType="work"
         projectId={5}
-        initialPosition={desktopFolders["nike-folder"]?.position || { x: 50, y: 100 }}
+        initialPosition={
+          desktopFolders["echowithin-folder"]?.position || { x: 50, y: 100 }
+        }
       />
       <DesktopFolder
-        id="ai-resume-folder"
-        name="AI Resume Analyzer"
+        id="adversanet-folder"
+        name="AdversaNet"
         icon="/images/folder.png"
         folderType="work"
         projectId={6}
-        initialPosition={desktopFolders["ai-resume-folder"]?.position || { x: 50, y: 240 }}
+        initialPosition={
+          desktopFolders["adversanet-folder"]?.position || { x: 50, y: 240 }
+        }
       />
       <DesktopFolder
-        id="food-delivery-folder"
-        name="Food Delivery App"
+        id="exoplanetarium-folder"
+        name="Exoplanetarium"
         icon="/images/folder.png"
         folderType="work"
         projectId={7}
-        initialPosition={desktopFolders["food-delivery-folder"]?.position || { x: 50, y: 380 }}
+        initialPosition={
+          desktopFolders["exoplanetarium-folder"]?.position || { x: 50, y: 380 }
+        }
       />
-      
+      <DesktopFolder
+        id="farmbandhu-folder"
+        name="FarmBandhu"
+        icon="/images/folder.png"
+        folderType="work"
+        projectId={8}
+        initialPosition={
+          desktopFolders["farmbandhu-folder"]?.position || { x: 50, y: 520 }
+        }
+      />
+      <DesktopFolder
+        id="mediscribe-folder"
+        name="Mediscribe"
+        icon="/images/folder.png"
+        folderType="work"
+        projectId={9}
+        initialPosition={
+          desktopFolders["mediscribe-folder"]?.position || { x: 50, y: 660 }
+        }
+      />
+
       <WindowManager />
       <Dock />
     </div>

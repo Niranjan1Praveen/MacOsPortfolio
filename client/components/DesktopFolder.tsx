@@ -19,6 +19,7 @@ export default function DesktopFolder({
   name, 
   icon, 
   folderType,
+  projectId,
   initialPosition 
 }: DesktopFolderProps) {
   const folderRef = useRef<HTMLDivElement>(null);
@@ -26,7 +27,7 @@ export default function DesktopFolder({
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [position, setPosition] = useState(initialPosition);
   
-  const { openWindow, updateFolderPosition } = useWindowStore();
+  const { openWindow, focusWindow, windows, updateFolderPosition } = useWindowStore();
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -35,7 +36,7 @@ export default function DesktopFolder({
     if (rect) {
       setDragOffset({
         x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+        y: e.clientY - rect.top,
       });
     }
   };
@@ -53,7 +54,7 @@ export default function DesktopFolder({
       
       const newPosition = {
         x: Math.max(10, Math.min(newX, maxX)),
-        y: Math.max(80, Math.min(newY, maxY))
+        y: Math.max(80, Math.min(newY, maxY)),
       };
       
       setPosition(newPosition);
@@ -76,23 +77,44 @@ export default function DesktopFolder({
   }, [isDragging, dragOffset, id, updateFolderPosition]);
 
   const handleDoubleClick = () => {
-    // Open the folder in Finder
-    openWindow(
-      `finder-${folderType}`,
-      "finder",
-      `Finder - ${name}`,
-      { folderType, folderName: name }
+    // Find the project from workProjects
+    const workProjects = locations.work?.children || [];
+    const project = workProjects.find((p: any) => p.id === projectId);
+    
+    if (!project) return;
+
+    // Check if Finder window is already open
+    const existingFinder = Object.values(windows).find(
+      (w: any) => w.type === "finder" && w.data?.projectId === projectId
     );
+
+    if (existingFinder) {
+      // If window exists, just focus it
+      focusWindow(existingFinder.id);
+    } else {
+      // Open new Finder window with the project selected
+      openWindow(
+        `finder-${projectId}`,
+        "finder",
+        `Finder - ${project.name}`,
+        { 
+          folderType: "work", 
+          folderName: project.name,
+          projectId: projectId,
+          initialProject: project // Pass the project data to auto-select it
+        }
+      );
+    }
   };
 
   return (
     <div
       ref={folderRef}
-      className="absolute flex flex-col items-center w-24 hover:cursor-grab select-none group"
+      className="absolute flex flex-col items-center w-24 cursor-default hover:cursor-grab select-none group"
       style={{
         left: position.x,
         top: position.y,
-        zIndex: isDragging ? 1000 : 10
+        zIndex: isDragging ? 1000 : 10,
       }}
       onMouseDown={handleMouseDown}
       onDoubleClick={handleDoubleClick}

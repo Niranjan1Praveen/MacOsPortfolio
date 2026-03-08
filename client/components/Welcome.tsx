@@ -169,7 +169,7 @@ export default function Welcome() {
 
   return (
     <section className="fixed inset-0 flex flex-col items-center justify-center pointer-events-none">
-      <div className="text-center px-4">
+      <div className="text-center px-4 text-white z-10">
         <p
           ref={titleRef}
           className="pointer-events-auto text-xl md:text-2xl lg:text-3xl mb-4 cursor-default"
