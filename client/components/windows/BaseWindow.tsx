@@ -17,7 +17,7 @@ export default function BaseWindow({ id, title, children }: BaseWindowProps) {
   const [isResizing, setIsResizing] = useState(false);
   const [resizeDirection, setResizeDirection] = useState<string | null>(null);
   const { theme } = useTheme();
-  
+
   const {
     windows,
     focusWindow,
@@ -134,8 +134,8 @@ export default function BaseWindow({ id, title, children }: BaseWindowProps) {
     <div
       ref={windowRef}
       className={`fixed rounded-lg shadow-2xl overflow-hidden transition-colors duration-200 ${
-        isDark 
-          ? "bg-[#1e1e1e] border-gray-800" 
+        isDark
+          ? "bg-[#1e1e1e] border-gray-800"
           : "bg-white/90 backdrop-blur-md border-gray-200"
       }`}
       style={{
@@ -151,26 +151,84 @@ export default function BaseWindow({ id, title, children }: BaseWindowProps) {
       {/* Window Header */}
       <div
         className={`window-header h-10 backdrop-blur-sm border-b flex items-center px-3 cursor-grab select-none transition-colors duration-200 ${
-          isDark
-            ? "bg-[#323232] border-none"
-            : "bg-gray-100/80 border-gray-200"
+          isDark ? "bg-[#323232] border-none" : "bg-gray-100/80 border-gray-200"
         }`}
       >
-        <div className="flex gap-2 mr-4">
+        <div className="flex gap-2 mr-4 group/parent">
           <button
             onClick={() => closeWindow(id)}
-            className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 focus:outline-none"
-          />
+            className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 focus:outline-none relative"
+          >
+            <svg
+              className="absolute inset-0 w-3 h-3 text-red-900 opacity-0 group-hover/parent:opacity-100 transition-opacity"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={3}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
           <button
             onClick={() => minimizeWindow(id)}
-            className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 focus:outline-none"
-          />
+            className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 focus:outline-none relative"
+          >
+            <svg
+              className="absolute inset-0 w-3 h-3 text-yellow-900 opacity-0 group-hover/parent:opacity-100 transition-opacity"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={3}
+                d="M20 12H4"
+              />
+            </svg>
+          </button>
+
           <button
             onClick={() =>
               windowData.isMaximized ? restoreWindow(id) : maximizeWindow(id)
             }
-            className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 focus:outline-none"
-          />
+            className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 focus:outline-none relative"
+          >
+            {windowData.isMaximized ? (
+              <svg
+                className="absolute inset-0 w-3 h-3 text-green-900 opacity-0 group-hover/parent:opacity-100 transition-opacity"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="absolute inset-0 w-3 h-3 text-green-900 opacity-0 group-hover/parent:opacity-100 transition-opacity"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                />
+              </svg>
+            )}
+          </button>
         </div>
 
         <div

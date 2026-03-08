@@ -503,7 +503,7 @@ const ABOUT_LOCATION = {
       kind: "file",
       fileType: "img",
       position: "top-10 left-5",
-      imageUrl: "/images/adrian.jpg",
+      imageUrl: "/images/niranjan.jpeg",
     },
     {
       id: 2,
@@ -512,7 +512,7 @@ const ABOUT_LOCATION = {
       kind: "file",
       fileType: "img",
       position: "top-28 right-72",
-      imageUrl: "/images/adrian-2.jpg",
+      imageUrl: "/images/niranjan.jpeg",
     },
     {
       id: 3,
@@ -521,7 +521,7 @@ const ABOUT_LOCATION = {
       kind: "file",
       fileType: "img",
       position: "top-52 left-80",
-      imageUrl: "/images/adrian-3.jpeg",
+      imageUrl: "/images/niranjan.jpeg",
     },
     {
       id: 4,
@@ -531,7 +531,6 @@ const ABOUT_LOCATION = {
       fileType: "txt",
       position: "top-60 left-5",
       subtitle: "Meet the Developer Behind the Code",
-      image: "/images/adrian.jpg",
       description: [
         "👋 Hi, I'm Niranjan Praveen A Full Stack Developer, AI Engineer, and SEO Content Writer who builds intelligent web experiences and crafts content that ranks. I bridge the gap between cutting-edge AI technology and human connection—writing clean code on one side, and search-optimized content on the other.",
         "What I Do?",
