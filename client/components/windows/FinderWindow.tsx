@@ -263,18 +263,20 @@ export default function FinderWindow({ data }: FinderWindowProps) {
             {selectedProject.children?.map((item: any) => (
               <div
                 key={item.id}
-                className={`flex flex-col items-center p-2 rounded cursor-default group transition-colors ${
+                className={`flex flex-col items-center justify-between p-2 rounded cursor-default group transition-colors hover:cursor-pointer ${
                   isDark ? "hover:bg-[#323232]" : "hover:bg-gray-100"
                 }`}
                 onDoubleClick={() => handleFileDoubleClick(item)}
               >
-                <Image
-                  src={item.icon}
-                  alt={item.name}
-                  width={48}
-                  height={48}
-                  className="mb-1 group-hover:scale-110 transition-transform"
-                />
+                <div className="w-20 h-20 flex items-center justify-center mb-1">
+                  <Image
+                    src={item.icon}
+                    alt={item.name}
+                    width={48}
+                    height={48}
+                    className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform"
+                  />
+                </div>
                 <span
                   className={`text-xs text-center truncate w-full ${isDark ? "text-gray-400" : "text-gray-600"}`}
                 >
